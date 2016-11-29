@@ -89,15 +89,13 @@ public class MainActivity extends AppCompatActivity {
         wv1.getSettings().setJavaScriptEnabled(true);       //訪問頁面中有Java Script,必須設置支持Java Script
         //wv1.getSettings().setUseWideViewPort(true);
         //wv1.getSettings().setLoadWithOverviewMode(true);
-        wv1.getSettings().setSupportZoom(true);
+        wv1.getSettings().setSupportZoom(true);             // 設置支持縮放
         wv1.getSettings().setBuiltInZoomControls(true);
-        wv1.setInitialScale(webScale);
+        wv1.setInitialScale(webScale);                      // 設置縮放比例
         wv1.loadUrl(urlHum + "&api_key=" + api_key);
 
         wv2.setWebChromeClient(new WebChromeClient());
         wv2.getSettings().setJavaScriptEnabled(true);
-        //wv2.getSettings().setUseWideViewPort(true);
-        //wv2.getSettings().setLoadWithOverviewMode(true);
         wv2.getSettings().setSupportZoom(true);
         wv2.getSettings().setBuiltInZoomControls(true);
         wv2.setInitialScale(webScale);
@@ -105,8 +103,6 @@ public class MainActivity extends AppCompatActivity {
 
         wv3.setWebChromeClient(new WebChromeClient());
         wv3.getSettings().setJavaScriptEnabled(true);
-        //wv3.getSettings().setUseWideViewPort(true);
-        //wv3.getSettings().setLoadWithOverviewMode(true);
         wv3.getSettings().setSupportZoom(true);
         wv3.getSettings().setBuiltInZoomControls(true);
         wv3.setInitialScale(webScale);
