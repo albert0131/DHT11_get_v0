@@ -53,8 +53,21 @@ public class MainActivity extends AppCompatActivity {
 
         btnHum = (Button) findViewById(R.id.buttonHum);
 
-                RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+        btnHum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, Humidity.class);
+                startActivity(intent);
+                //finish();
+
+            }
+        });
+    }
+
+    public void click(View v) {
 // ----------- 抓取ThinkSpeak last data --------------------
+        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
         // feed需利用Object解析
         StringRequest request = new StringRequest(urlLast + "&api_key=" + api_key,
 
@@ -72,9 +85,6 @@ public class MainActivity extends AppCompatActivity {
                             String tempLast = objLast.getString("field2");
                             String pm25Last = objLast.getString("field3");
 
-//                            Log.d("NET", humiLast);
-//                            Log.d("NET", tempLast);
-//                            Log.d("NET", pm25Last);
                             tv1.setText("目前濕度值: " + humiLast);
                             tv2.setText("目前溫度值: " + tempLast);
                             tv3.setText("目前PM2.5值: " + pm25Last);
@@ -89,25 +99,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-            }}
+            }
+        }
         );
 
         queue.add(request);
         queue.start();
+    }
+}
 // -------------------------------------------------
 
 
-        btnHum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this , Humidity.class);
-                startActivity(intent);
-                //finish();
-
-            }
-        });
-    }
 
 
 /*
@@ -136,6 +138,3 @@ public class MainActivity extends AppCompatActivity {
         wv3.loadUrl(urlPm25 + "&api_key=" + api_key);
 // --------------------------------------------------
 */
-
-
-}

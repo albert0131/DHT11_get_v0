@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -18,23 +19,19 @@
         android:layout_alignParentStart="true"
         android:id="@+id/linearLayout1">
 
-        <TextView
-            android:text="環境溫溼度監測"
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView11"
-            android:textAllCaps="true"
-            android:textAlignment="center"
-            android:textStyle="normal|bold" />
+            app:srcCompat="@drawable/title"
+            android:id="@+id/imageView" />
 
-        <TextView
-            android:text="現在資訊 :"
+        <Button
+            android:text="現在資訊"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textAllCaps="false" />
+            android:id="@+id/buttonNow"
+            android:textSize="24sp"
+            android:onClick="click" />
 
         <TextView
             android:text="Temperature"
@@ -70,21 +67,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/buttonTem"
-            android:onClick="click2" />
+            android:onClick="click2"
+            android:textSize="24sp" />
 
         <Button
             android:text="濕度區間資料"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/buttonHum"
-            android:onClick="click1" />
+            android:onClick="click1"
+            android:textSize="24sp" />
 
         <Button
             android:text="PM2.5區間資料"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/buttonPm25"
-            android:onClick="click3" />
+            android:onClick="click3"
+            android:textSize="24sp" />
 
     </LinearLayout>
 
