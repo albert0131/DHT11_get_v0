@@ -60,6 +60,15 @@
             android:layout_marginTop="14dp"
             android:id="@+id/textView8" />
 
+        <Button
+            android:text="Back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/back"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            android:textStyle="normal|bold" />
+
     </LinearLayout>
 
 </RelativeLayout>
