@@ -1,6 +1,8 @@
 package com.example.user.dht11_get_v0;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +27,10 @@ public class MainActivity extends AppCompatActivity {
 
     TextView tv1, tv2, tv3;
     WebView wv1, wv2, wv3;
-    int webScale = 100;
+
+    private Button btnHum;
+
+    int webScale = 100;             // set webview scale
     String api_key = "TC1HMH4R7SSVE93A";
     String urlLast = "https://api.thingspeak.com/channels/176126/feed/last.json?";
     // 圖表資料url
@@ -41,11 +47,13 @@ public class MainActivity extends AppCompatActivity {
         tv2 = (TextView) findViewById(R.id.textView2);
         tv3 = (TextView) findViewById(R.id.textView3);
 
-        wv1 = (WebView) findViewById(R.id.webView1);
-        wv2 = (WebView) findViewById(R.id.webView2);
-        wv3 = (WebView) findViewById(R.id.webView3);
+//        wv1 = (WebView) findViewById(R.id.webView1);
+//        wv2 = (WebView) findViewById(R.id.webView2);
+//        wv3 = (WebView) findViewById(R.id.webView3);
 
-        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+        btnHum = (Button) findViewById(R.id.buttonHum);
+
+                RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
 // ----------- 抓取ThinkSpeak last data --------------------
         // feed需利用Object解析
         StringRequest request = new StringRequest(urlLast + "&api_key=" + api_key,
@@ -84,6 +92,25 @@ public class MainActivity extends AppCompatActivity {
             }}
         );
 
+        queue.add(request);
+        queue.start();
+// -------------------------------------------------
+
+
+        btnHum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this , Humidity.class);
+                startActivity(intent);
+                //finish();
+
+            }
+        });
+    }
+
+
+/*
 // --------- 顯示圖表資料 ----------------------------
         wv1.setWebChromeClient(new WebChromeClient());
         wv1.getSettings().setJavaScriptEnabled(true);       //訪問頁面中有Java Script,必須設置支持Java Script
@@ -108,9 +135,7 @@ public class MainActivity extends AppCompatActivity {
         wv3.setInitialScale(webScale);
         wv3.loadUrl(urlPm25 + "&api_key=" + api_key);
 // --------------------------------------------------
+*/
 
-        queue.add(request);
-        queue.start();
 
-    }
 }

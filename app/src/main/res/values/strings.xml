@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DHT11_get_v0</string>
+    <string name="title_activity_humidity">Humidity</string>
 </resources>

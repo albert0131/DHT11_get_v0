@@ -19,7 +19,16 @@
         android:id="@+id/linearLayout1">
 
         <TextView
-            android:text="現在環境資訊 :"
+            android:text="環境溫溼度監測"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView11"
+            android:textAllCaps="true"
+            android:textAlignment="center"
+            android:textStyle="normal|bold" />
+
+        <TextView
+            android:text="現在資訊 :"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView"
@@ -28,17 +37,17 @@
             android:textAllCaps="false" />
 
         <TextView
-            android:text="Humidity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView1"
-            android:textSize="14sp" />
-
-        <TextView
             android:text="Temperature"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView2"
+            android:textSize="14sp" />
+
+        <TextView
+            android:text="Humidity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView1"
             android:textSize="14sp" />
 
         <TextView
@@ -56,20 +65,26 @@
             android:fontFamily="sans-serif"
             android:textStyle="normal|bold" />
 
-        <WebView
-            android:layout_width="wrap_content"
+        <Button
+            android:text="溫度區間資料"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/webView1" />
+            android:id="@+id/buttonTem"
+            android:onClick="click2" />
 
-        <WebView
-            android:layout_width="wrap_content"
+        <Button
+            android:text="濕度區間資料"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/webView2" />
+            android:id="@+id/buttonHum"
+            android:onClick="click1" />
 
-        <WebView
-            android:layout_width="wrap_content"
+        <Button
+            android:text="PM2.5區間資料"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/webView3" />
+            android:id="@+id/buttonPm25"
+            android:onClick="click3" />
 
     </LinearLayout>
 
