@@ -26,12 +26,13 @@
             android:id="@+id/imageView" />
 
         <Button
-            android:text="現在資訊"
+            android:text="現在環境資訊"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/buttonNow"
             android:textSize="24sp"
-            android:onClick="click" />
+            android:onClick="click"
+            android:textColor="?attr/actionModeSplitBackground" />
 
         <TextView
             android:text="Temperature"
@@ -68,7 +69,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/buttonTem"
             android:onClick="click2"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textColor="@android:color/holo_red_dark" />
 
         <Button
             android:text="濕度區間資料"
@@ -76,7 +78,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/buttonHum"
             android:onClick="click1"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textColor="@android:color/holo_green_dark" />
 
         <Button
             android:text="PM2.5區間資料"
@@ -84,7 +87,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/buttonPm25"
             android:onClick="click3"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textColor="@android:color/holo_blue_dark" />
 
     </LinearLayout>
 

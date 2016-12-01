@@ -24,11 +24,13 @@ public class PM25 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pm25);
 
+        wv3 = (WebView) findViewById(R.id.webView3);
+
         wv3.setWebChromeClient(new WebChromeClient());
         wv3.getSettings().setJavaScriptEnabled(true);
         wv3.getSettings().setSupportZoom(true);
         wv3.getSettings().setBuiltInZoomControls(true);
-        wv3.setInitialScale(webScale);
-        wv3.loadUrl(urlPm25 + "&api_key=" + api_key);
+        wv3.setInitialScale(Variable.webScale);
+        wv3.loadUrl(Variable.urlPm25 + "&api_key=" + Variable.api_key);
     }
 }
