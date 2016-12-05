@@ -19,18 +19,25 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static android.R.attr.data;
+
 class Variable {
      static int webScale = 150;                       // set webview scale
+     static int fieldResults = 60;
      static String api_key = "TC1HMH4R7SSVE93A";      // ThingSpeak API key
     // 圖表資料url
-     static String urlLast = "https://api.thingspeak.com/channels/176126/feed/last.json?";
-     static String urlTem = "https://thingspeak.com/channels/176126/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=%E6%BA%AB%E5%BA%A6&type=line";
-     static String urlHum = "https://thingspeak.com/channels/176126/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=%E6%BF%95%E5%BA%A6&type=line";
-     static String urlPm25 = "https://thingspeak.com/channels/176126/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=%E7%94%B2%E8%84%98&type=line";
+     static String urlLast = "https://api.thingspeak.com/channels/189185/feed/last.json?";
+     //static String urlLast = "https://api.thingspeak.com/channels/176126/feed/last.json?";
+
+     static String urlTem = "https://thingspeak.com/channels/189185/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=%E6%BA%AB%E5%BA%A6&type=line";
+     static String urlHum = "https://thingspeak.com/channels/189185/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=%E6%BF%95%E5%BA%A6&type=line";
+     static String urlPm25 = "https://thingspeak.com/channels/189185/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=%E7%94%B2%E8%84%98&type=line";
+     static String urlFeeds = "https://api.thingspeak.com/channels/189185/feeds.json?";
 
 }
 
@@ -39,62 +46,26 @@ public class MainActivity extends AppCompatActivity {
 
     TextView tv1, tv2, tv3;
 
-    Button btnHum;
-    Button btnTem;
-    Button btnPm25;
+//    Button btnTem;
+//    Button btnHum;
+//    Button btnPm25;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tv1 = (TextView) findViewById(R.id.textView1);
-        tv2 = (TextView) findViewById(R.id.textView2);
-        tv3 = (TextView) findViewById(R.id.textView3);
+        tv1 = (TextView) findViewById(R.id.textView1);      // temp
+        tv2 = (TextView) findViewById(R.id.textView2);      // hum
+        tv3 = (TextView) findViewById(R.id.textView3);      // pm2.5
 
-        btnTem = (Button) findViewById(R.id.buttonTem);
-        btnHum = (Button) findViewById(R.id.buttonHum);
-        btnPm25 = (Button) findViewById(R.id.buttonPm25);
-
-        btnTem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this, Temperature.class);
-                startActivity(intent);
-                //finish();
-            }
-        });
-
-        btnHum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this, Humidity.class);
-                startActivity(intent);
-                //finish();
-            }
-        });
-
-        btnPm25.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this, PM25.class);
-                startActivity(intent);
-                //finish();
-            }
-        });
     }
 
-    public void click(View v) {
+    public void clickNow(View v) {
 // ----------- 抓取ThinkSpeak last data --------------------
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
         // feed需利用Object解析
         StringRequest request = new StringRequest(Variable.urlLast + "&api_key=" + Variable.api_key,
-
-                // results=? 設定抓取筆數 (field需用array解析)
-                //StringRequest request = new StringRequest("https://api.thingspeak.com/channels/176126/field/1.json?results=1&api_key=TC1HMH4R7SSVE93A",
 
                 new Response.Listener<String>() {
                     @Override
@@ -103,12 +74,12 @@ public class MainActivity extends AppCompatActivity {
                         // ------- JSON 寫法 -------
                         try {
                             JSONObject objLast = new JSONObject(response);
-                            String humiLast = objLast.getString("field1");
-                            String tempLast = objLast.getString("field2");
+                            String tempLast = objLast.getString("field1");
+                            String humiLast = objLast.getString("field2");
                             String pm25Last = objLast.getString("field3");
 
-                            tv1.setText("目前濕度值: " + humiLast);
-                            tv2.setText("目前溫度值: " + tempLast);
+                            tv1.setText("目前溫度值: " + tempLast);
+                            tv2.setText("目前濕度值: " + humiLast);
                             tv3.setText("目前PM2.5值: " + pm25Last);
 
                         } catch (JSONException e) {
@@ -129,5 +100,110 @@ public class MainActivity extends AppCompatActivity {
         queue.start();
     }
 
+    // ----- get chart data -------------------------------------
+    public void clickTemp(View view) {
+        Intent intent = new Intent();
+        intent.setClass(MainActivity.this, Temperature.class);
+        startActivity(intent);
+    }
+
+    public void clickHum(View view) {
+        Intent intent = new Intent();
+        intent.setClass(MainActivity.this, Humidity.class);
+        startActivity(intent);
+    }
+
+    public void clickPm25(View view) {
+        Intent intent = new Intent();
+        intent.setClass(MainActivity.this, PM25.class);
+        startActivity(intent);
+    }
+    // ---------------------------------------------------
+
 }
+
+
+/*
+    //------------- try
+    public void clickCal(View view) {
+
+        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+        // field需用array解析, results=? 設定抓取筆數
+        StringRequest request = new StringRequest(Variable.urlFeeds,
+
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        // ------- GSON 寫法 -------
+                        Gson gson = new Gson();
+                        ThingSpeak thingSpeak = gson.fromJson(response, ThingSpeak.class);
+//                        for(Feeds data : thingSpeak.getFeeds())
+//                        {
+//                            Log.d("TEMP", data.getField1());
+//                        }
+
+                        for (int i=0 ; i < thingSpeak.getFeeds().length ; i++)
+                        {
+                            String temp = thingSpeak.getFeeds()[i].getField1();
+                            Log.d("TEMP", temp);
+                        }
+
+//                            tvTempMax.setText("最大溫度值: " + tempLast);
+//                            tvTempMin.setText("最小溫度值: " + humiLast);
+//                            tvTempAvg.setText("平均溫度值: " + pm25Last);
+                        // --------------------------
+                        //Log.d("TEMP", thingSpeak.getFeeds()[1].getField1());
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }
+        );
+
+        queue.add(request);
+        queue.start();
+    }
+
+
+}
+*/
+
+// Button setOnClickListener
+//        btnTem = (Button) findViewById(R.id.buttonTem);
+//        btnHum = (Button) findViewById(R.id.buttonHum);
+//        btnPm25 = (Button) findViewById(R.id.buttonPm25);
+
+//        btnTem.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent();
+//                intent.setClass(MainActivity.this, Temperature.class);
+//                startActivity(intent);
+//                //finish();
+//            }
+//        });
+//
+//        btnHum.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent();
+//                intent.setClass(MainActivity.this, Humidity.class);
+//                startActivity(intent);
+//                //finish();
+//            }
+//        });
+//
+//        btnPm25.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent();
+//                intent.setClass(MainActivity.this, PM25.class);
+//                startActivity(intent);
+//                //finish();
+//            }
+//        });
+
 

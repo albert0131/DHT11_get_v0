@@ -10,31 +10,27 @@ import android.widget.Button;
 
 public class PM25 extends AppCompatActivity {
 
-    WebView wv3;
-    Button btnBack;
+    WebView wv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pm25);
 
-        wv3 = (WebView) findViewById(R.id.webView3);
-        btnBack = (Button) findViewById(R.id.back);
+        wv = (WebView) findViewById(R.id.webView3);
 
-        wv3.setWebChromeClient(new WebChromeClient());
-        wv3.getSettings().setJavaScriptEnabled(true);
-        wv3.getSettings().setSupportZoom(true);
-        wv3.getSettings().setBuiltInZoomControls(true);
-        wv3.setInitialScale(Variable.webScale);
-        wv3.loadUrl(Variable.urlPm25 + "&api_key=" + Variable.api_key);
+        wv.setWebChromeClient(new WebChromeClient());
+        wv.getSettings().setJavaScriptEnabled(true);
+        wv.getSettings().setSupportZoom(true);
+        wv.getSettings().setBuiltInZoomControls(true);
+        wv.setInitialScale(Variable.webScale);
+        wv.loadUrl(Variable.urlPm25 + "&api_key=" + Variable.api_key);
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(PM25.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+    }
+
+    public void clickBack(View v) {
+        Intent intent = new Intent();
+        intent.setClass(PM25.this, MainActivity.class);
+        startActivity(intent);
     }
 }
