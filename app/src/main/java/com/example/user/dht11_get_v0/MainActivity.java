@@ -28,16 +28,17 @@ import static android.R.attr.data;
 
 class Variable {
      static int webScale = 150;                       // set webview scale
-     static int fieldResults = 60;
+     static int fieldResults = 60;                    // results=? 設定抓取筆數
      static String api_key = "TC1HMH4R7SSVE93A";      // ThingSpeak API key
-    // 圖表資料url
+    // last資料url
      static String urlLast = "https://api.thingspeak.com/channels/189185/feed/last.json?";
-     //static String urlLast = "https://api.thingspeak.com/channels/176126/feed/last.json?";
-
-     static String urlTem = "https://thingspeak.com/channels/189185/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=%E6%BA%AB%E5%BA%A6&type=line";
+     //static String urlLast = "https://api.thingspeak.com/channels/176126/feed/last.json?";   // for test url
+     // 圖表資料url
+     static String urlTem = "https://thingspeak.com/channels/189185/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&title=%E6%BA%AB%E5%BA%A6&type=line" + fieldResults;
      static String urlHum = "https://thingspeak.com/channels/189185/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=%E6%BF%95%E5%BA%A6&type=line";
      static String urlPm25 = "https://thingspeak.com/channels/189185/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=%E7%94%B2%E8%84%98&type=line";
-     static String urlFeeds = "https://api.thingspeak.com/channels/189185/feeds.json?";
+     // all資料url
+     static String urlFeeds = "https://api.thingspeak.com/channels/189185/feeds.json?" + fieldResults;
 
 }
 
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 // ----------- 抓取ThinkSpeak last data --------------------
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
         // feed需利用Object解析
-        StringRequest request = new StringRequest(Variable.urlLast + "&api_key=" + Variable.api_key,
+        StringRequest request = new StringRequest(Variable.urlLast,   // + "&api_key=" + Variable.api_key,
 
                 new Response.Listener<String>() {
                     @Override
@@ -123,54 +124,7 @@ public class MainActivity extends AppCompatActivity {
 }
 
 
-/*
-    //------------- try
-    public void clickCal(View view) {
-
-        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
-        // field需用array解析, results=? 設定抓取筆數
-        StringRequest request = new StringRequest(Variable.urlFeeds,
-
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        // ------- GSON 寫法 -------
-                        Gson gson = new Gson();
-                        ThingSpeak thingSpeak = gson.fromJson(response, ThingSpeak.class);
-//                        for(Feeds data : thingSpeak.getFeeds())
-//                        {
-//                            Log.d("TEMP", data.getField1());
-//                        }
-
-                        for (int i=0 ; i < thingSpeak.getFeeds().length ; i++)
-                        {
-                            String temp = thingSpeak.getFeeds()[i].getField1();
-                            Log.d("TEMP", temp);
-                        }
-
-//                            tvTempMax.setText("最大溫度值: " + tempLast);
-//                            tvTempMin.setText("最小溫度值: " + humiLast);
-//                            tvTempAvg.setText("平均溫度值: " + pm25Last);
-                        // --------------------------
-                        //Log.d("TEMP", thingSpeak.getFeeds()[1].getField1());
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }
-        );
-
-        queue.add(request);
-        queue.start();
-    }
-
-
-}
-*/
-
+// ----------------------------------------------------------
 // Button setOnClickListener
 //        btnTem = (Button) findViewById(R.id.buttonTem);
 //        btnHum = (Button) findViewById(R.id.buttonHum);
