@@ -54,22 +54,38 @@ public class Temperature extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(Temperature.this);
         // field需用array解析, results=? 設定抓取筆數
-        StringRequest request = new StringRequest(Variable.urlFeeds + Variable.fieldResults,
+        StringRequest request = new StringRequest(Variable.urlFeeds,// + Variable.fieldResults,
 
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
-
-                        String tempMax = null;
-                        String tempTime;
+                        
+                        String temp = null;
+                        int tempValue = 0;
+                        int tempSum = 0;
+                        int tempMax = 0;
+                        int tempMin = 100;
+                        int tempAvg = 0;
+                        //int tempBuf = 0;
+                        
                         try {
                             for(int i=0 ; i<Variable.fieldResults ; i++) {
-                                tempTime = new JSONArray(new JSONObject(response).getString("feeds")).getJSONObject(i).getString("created_at");
-                                tempMax = new JSONArray(new JSONObject(response).getString("feeds")).getJSONObject(i).getString("field1");
-                                Log.d("Time", tempTime);
-                                Log.d("TEMP", tempMax);
+                                temp = new JSONArray(new JSONObject(response).getString("feeds")).getJSONObject(i).getString("field1");
+                                tempValue = 
+                                tempSum += tempValue;
+                                //tempBuf = tempValue;
+                                if(tempValue > tempMax)
+                                    tempMax = tempValue;
+                                if(tempValue < tempMin)
+                                    tempMin = tempValue;                               
+                                
+//                                 tempTime = new JSONArray(new JSONObject(response).getString("feeds")).getJSONObject(i).getString("created_at");
+//                                 tempMax = new JSONArray(new JSONObject(response).getString("feeds")).getJSONObject(i).getString("field1");
+//                                 Log.d("Time", tempTime);
+//                                 Log.d("TEMP", tempMax);
                             }
+                            tempAvg = tempSum/Variable.fieldResults;
+                            
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -95,8 +111,8 @@ public class Temperature extends AppCompatActivity {
 *///------------------------------------------------------------------------------------
 
                             tvTempMax.setText("最大溫度值: " + tempMax);
-//                            tvTempMin.setText("最小溫度值: " + humiLast);
-//                            tvTempAvg.setText("平均溫度值: " + pm25Last);
+                            tvTempMin.setText("最小溫度值: " + tempMin);
+                            tvTempAvg.setText("平均溫度值: " + tempAvg);
                         // --------------------------
                     }
                 }, new Response.ErrorListener() {
