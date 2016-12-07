@@ -22,6 +22,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 public class Temperature extends AppCompatActivity {
 
     WebView wv;
@@ -32,10 +33,12 @@ public class Temperature extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_temperature);
+        setTitle(Variable.titleTemp);
 
         wv = (WebView) findViewById(R.id.webView1);
 //        btnBack = (Button) findViewById(R.id.back);
 
+        // --------- 顯示圖表資料 ----------------------------
         wv.setWebChromeClient(new WebChromeClient());
         wv.getSettings().setJavaScriptEnabled(true);
         wv.getSettings().setSupportZoom(true);
@@ -50,6 +53,7 @@ public class Temperature extends AppCompatActivity {
 
     }
 
+    // ------ 計算最大最小平均值 ----------------------------------------
     public void clickCalculate(View v) {
 
         RequestQueue queue = Volley.newRequestQueue(Temperature.this);
@@ -60,24 +64,24 @@ public class Temperature extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         
-                        String temp = null;
-                        int tempValue = 0;
-                        int tempSum = 0;
-                        int tempMax = 0;
-                        int tempMin = 100;
-                        int tempAvg = 0;
+                        String temp;
+                        float tempValue;
+                        float tempSum = 0;
+                        float tempMax = 0;
+                        float tempMin = 100;
+                        float tempAvg = 0;
                         //int tempBuf = 0;
                         
                         try {
                             for(int i=0 ; i<Variable.fieldResults ; i++) {
                                 temp = new JSONArray(new JSONObject(response).getString("feeds")).getJSONObject(i).getString("field1");
-                                tempValue = 
+                                tempValue = Float.parseFloat(temp);
                                 tempSum += tempValue;
                                 //tempBuf = tempValue;
                                 if(tempValue > tempMax)
                                     tempMax = tempValue;
                                 if(tempValue < tempMin)
-                                    tempMin = tempValue;                               
+                                    tempMin = tempValue;
                                 
 //                                 tempTime = new JSONArray(new JSONObject(response).getString("feeds")).getJSONObject(i).getString("created_at");
 //                                 tempMax = new JSONArray(new JSONObject(response).getString("feeds")).getJSONObject(i).getString("field1");
@@ -110,9 +114,9 @@ public class Temperature extends AppCompatActivity {
                         }
 *///------------------------------------------------------------------------------------
 
-                            tvTempMax.setText("最大溫度值: " + tempMax);
-                            tvTempMin.setText("最小溫度值: " + tempMin);
-                            tvTempAvg.setText("平均溫度值: " + tempAvg);
+                            tvTempMax.setText("最大溫度值: " + String.valueOf(tempMax) + " 度C");
+                            tvTempMin.setText("最小溫度值: " + String.valueOf(tempMin) + " 度C");
+                            tvTempAvg.setText("平均溫度值: " + String.valueOf(tempAvg) + " 度C");
                         // --------------------------
                     }
                 }, new Response.ErrorListener() {
@@ -126,8 +130,9 @@ public class Temperature extends AppCompatActivity {
         queue.add(request);
         queue.start();
     }
+    // -------------------------------------------------------------------------------
 
-
+    //
     public void clickBack(View v) {
         Intent intent = new Intent();
         intent.setClass(Temperature.this, MainActivity.class);

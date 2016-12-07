@@ -26,22 +26,29 @@ import org.json.JSONObject;
 
 import static android.R.attr.data;
 
+//-------------------- 設定變數 --------------------------------------------------
 class Variable {
-     static int webScale = 150;                       // set webview scale
-     static int fieldResults = 60;                    // results=? 設定抓取筆數
-     static String api_key = "TC1HMH4R7SSVE93A";      // ThingSpeak API key
+
+    static String titleMain = "環境監測網";
+    static String titleTemp = titleMain + " -- 溫度資訊";
+    static String titleHum = titleMain + " -- 濕度資訊";
+    static String titlePm25 = titleMain + " -- PM2.5資訊";
+
+    static int webScale = 150;                       // set webview scale
+    static int fieldResults = 100;                    // results=? 設定抓取筆數
+    static String api_key = "TC1HMH4R7SSVE93A";      // ThingSpeak API key
     // last資料url
-     static String urlLast = "https://api.thingspeak.com/channels/189185/feed/last.json?";
+    static String urlLast = "https://api.thingspeak.com/channels/189185/feed/last.json?";
      //static String urlLast = "https://api.thingspeak.com/channels/176126/feed/last.json?";   // for test url
      // 圖表資料url
-     static String urlTem = "https://thingspeak.com/channels/189185/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&title=%E6%BA%AB%E5%BA%A6&type=line" + fieldResults;
-     static String urlHum = "https://thingspeak.com/channels/189185/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=%E6%BF%95%E5%BA%A6&type=line";
-     static String urlPm25 = "https://thingspeak.com/channels/189185/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=%E7%94%B2%E8%84%98&type=line";
+    static String urlTem = "https://thingspeak.com/channels/189185/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&title=%E6%BA%AB%E5%BA%A6&type=line&results=" + fieldResults;
+    static String urlHum = "https://thingspeak.com/channels/189185/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&title=%E6%BF%95%E5%BA%A6&type=line&results=" + fieldResults;
+    static String urlPm25 = "https://thingspeak.com/channels/189185/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&title=%E7%94%B2%E8%84%98&type=line&results=" + fieldResults;
      // all資料url
-     static String urlFeeds = "https://api.thingspeak.com/channels/189185/feeds.json?" + fieldResults;
+    static String urlFeeds = "https://api.thingspeak.com/channels/189185/feeds.json?&results=" + fieldResults;
 
 }
-
+//------------------------------------------------------------------------------------
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,15 +62,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle(Variable.titleMain);
 
         tv1 = (TextView) findViewById(R.id.textView1);      // temp
         tv2 = (TextView) findViewById(R.id.textView2);      // hum
         tv3 = (TextView) findViewById(R.id.textView3);      // pm2.5
 
     }
-
+    // ----------- 抓取目前環境資訊(ThinkSpeak last data) -------------------------------
     public void clickNow(View v) {
-// ----------- 抓取ThinkSpeak last data --------------------
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
         // feed需利用Object解析
         StringRequest request = new StringRequest(Variable.urlLast,   // + "&api_key=" + Variable.api_key,
@@ -79,9 +86,9 @@ public class MainActivity extends AppCompatActivity {
                             String humiLast = objLast.getString("field2");
                             String pm25Last = objLast.getString("field3");
 
-                            tv1.setText("目前溫度值: " + tempLast);
-                            tv2.setText("目前濕度值: " + humiLast);
-                            tv3.setText("目前PM2.5值: " + pm25Last);
+                            tv1.setText("目前溫度值:     " + tempLast + " 度C");
+                            tv2.setText("目前濕度值:     " + humiLast + " %RH");
+                            tv3.setText("目前PM2.5濃度:  " + pm25Last + " μg/m3");
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -100,8 +107,9 @@ public class MainActivity extends AppCompatActivity {
         queue.add(request);
         queue.start();
     }
+    //-------------------------------------------------------------------------------------
 
-    // ----- get chart data -------------------------------------
+    // ----- Button for getting chart data ----------------------
     public void clickTemp(View view) {
         Intent intent = new Intent();
         intent.setClass(MainActivity.this, Temperature.class);
@@ -119,12 +127,12 @@ public class MainActivity extends AppCompatActivity {
         intent.setClass(MainActivity.this, PM25.class);
         startActivity(intent);
     }
-    // ---------------------------------------------------
+    // -----------------------------------------------------------
 
 }
 
 
-// ----------------------------------------------------------
+// -------- setOnClickListener method -------------------------------------
 // Button setOnClickListener
 //        btnTem = (Button) findViewById(R.id.buttonTem);
 //        btnHum = (Button) findViewById(R.id.buttonHum);

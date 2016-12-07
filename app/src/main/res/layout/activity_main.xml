@@ -39,21 +39,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView1"
-            android:textSize="14sp" />
+            android:textSize="18sp"
+            android:textStyle="normal|bold"
+            android:textColor="@android:color/holo_red_dark" />
 
         <TextView
             android:text="Humidity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView2"
-            android:textSize="14sp" />
+            android:textSize="18sp"
+            android:textColor="@android:color/holo_green_dark"
+            android:textStyle="normal|bold" />
 
         <TextView
             android:text="PM2.5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView3"
-            android:textSize="14sp" />
+            android:textSize="18sp"
+            android:textStyle="normal|bold"
+            android:textColor="@android:color/holo_blue_dark" />
 
         <TextView
             android:layout_width="match_parent"

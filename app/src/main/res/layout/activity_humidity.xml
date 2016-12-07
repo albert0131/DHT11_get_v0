@@ -37,19 +37,21 @@
             android:text="最大濕度 : "
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView5"
+            android:layout_below="@+id/humAvg"
             android:layout_alignParentStart="true"
             android:layout_marginTop="10dp"
-            android:id="@+id/textView7" />
+            android:id="@+id/humMax"
+            android:textSize="18sp" />
 
         <TextView
             android:text="最小濕度 : "
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView7"
+            android:layout_below="@+id/humMax"
             android:layout_alignParentStart="true"
             android:layout_marginTop="14dp"
-            android:id="@+id/textView8" />
+            android:id="@+id/humMin"
+            android:textSize="18sp" />
 
         <TextView
             android:text="平均濕度 : "
@@ -58,10 +60,20 @@
             android:layout_below="@+id/webView2"
             android:layout_alignParentStart="true"
             android:layout_marginTop="14dp"
-            android:id="@+id/textView5" />
+            android:id="@+id/humAvg"
+            android:textSize="18sp" />
 
         <Button
-            android:text="Back"
+            android:text="計算大小平均值"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button2"
+            android:textStyle="normal|bold"
+            android:textSize="18sp"
+            android:onClick="clickCalculate" />
+
+        <Button
+            android:text="返回"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/back"

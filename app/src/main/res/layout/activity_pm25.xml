@@ -34,32 +34,43 @@
             android:id="@+id/webView3" />
 
         <TextView
-            android:text="TextView"
+            android:text="最大PM2.5值 :"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView13"
+            android:id="@+id/pm25Max"
             android:textSize="18sp" />
 
         <TextView
-            android:text="TextView"
+            android:text="最小PM2.5值 :"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView14"
+            android:id="@+id/pm25Min"
             android:textSize="18sp" />
 
         <TextView
-            android:text="TextView"
+            android:text="平均PM2.5值"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView15"
+            android:id="@+id/pm25Avg"
             android:textSize="18sp" />
 
         <Button
-            android:text="Back"
+            android:text="計算大小平均值"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button3"
+            android:onClick="clickCalculate"
+            android:textSize="18sp"
+            android:textStyle="normal|bold" />
+
+        <Button
+            android:text="返回"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/back"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="normal|bold"
+            android:onClick="clickBack" />
     </LinearLayout>
 
 </RelativeLayout>

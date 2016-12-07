@@ -53,14 +53,16 @@
             android:textSize="18sp" />
 
         <Button
-            android:text="計算"
+            android:text="計算大小平均值"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button"
-            android:onClick="clickCalculate" />
+            android:onClick="clickCalculate"
+            android:textSize="18sp"
+            android:textStyle="normal|bold" />
 
         <Button
-            android:text="Back"
+            android:text="返回"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
