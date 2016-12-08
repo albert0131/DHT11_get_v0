@@ -114,9 +114,9 @@ public class Temperature extends AppCompatActivity {
                         }
 *///------------------------------------------------------------------------------------
 
-                            tvTempMax.setText("最大溫度值: " + String.valueOf(tempMax) + " 度C");
-                            tvTempMin.setText("最小溫度值: " + String.valueOf(tempMin) + " 度C");
-                            tvTempAvg.setText("平均溫度值: " + String.valueOf(tempAvg) + " 度C");
+                            tvTempMax.setText("最大溫度值: " + String.valueOf(tempMax) + " ℃");
+                            tvTempMin.setText("最小溫度值: " + String.valueOf(tempMin) + " ℃");
+                            tvTempAvg.setText("平均溫度值: " + String.valueOf(tempAvg) + " ℃");
                         // --------------------------
                     }
                 }, new Response.ErrorListener() {

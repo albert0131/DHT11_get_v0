@@ -54,23 +54,33 @@
             android:id="@+id/pm25Avg"
             android:textSize="18sp" />
 
-        <Button
-            android:text="計算大小平均值"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/button3"
-            android:onClick="clickCalculate"
-            android:textSize="18sp"
-            android:textStyle="normal|bold" />
+            android:layout_height="match_parent">
 
-        <Button
-            android:text="返回"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/back"
-            android:textSize="18sp"
-            android:textStyle="normal|bold"
-            android:onClick="clickBack" />
+            <Button
+                android:text="計算大小平均值"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button3"
+                android:onClick="clickCalculate"
+                android:textSize="18sp"
+                android:textStyle="normal|bold"
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Colored" />
+
+            <Button
+                android:text="返回"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/back"
+                android:textSize="18sp"
+                android:textStyle="normal|bold"
+                android:onClick="clickBack"
+                android:layout_weight="1"
+                style="@android:style/Widget.Button.Inset" />
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

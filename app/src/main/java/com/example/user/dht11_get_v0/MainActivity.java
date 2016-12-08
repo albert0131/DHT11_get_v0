@@ -41,9 +41,9 @@ class Variable {
     static String urlLast = "https://api.thingspeak.com/channels/189185/feed/last.json?";
      //static String urlLast = "https://api.thingspeak.com/channels/176126/feed/last.json?";   // for test url
      // 圖表資料url
-    static String urlTem = "https://thingspeak.com/channels/189185/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&title=%E6%BA%AB%E5%BA%A6&type=line&results=" + fieldResults;
-    static String urlHum = "https://thingspeak.com/channels/189185/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&title=%E6%BF%95%E5%BA%A6&type=line&results=" + fieldResults;
-    static String urlPm25 = "https://thingspeak.com/channels/189185/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&title=%E7%94%B2%E8%84%98&type=line&results=" + fieldResults;
+    static String urlTem = "https://api.thingspeak.com/channels/189185/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&type=line&timezone=Asia/Taipei&results=" + fieldResults;
+    static String urlHum = "https://api.thingspeak.com/channels/189185/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&type=line&timezone=Asia/Taipei&results=" + fieldResults;
+    static String urlPm25 = "https://api.thingspeak.com/channels/189185/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&type=line&timezone=Asia/Taipei&results=" + fieldResults;
      // all資料url
     static String urlFeeds = "https://api.thingspeak.com/channels/189185/feeds.json?&results=" + fieldResults;
 
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                             String humiLast = objLast.getString("field2");
                             String pm25Last = objLast.getString("field3");
 
-                            tv1.setText("目前溫度值:     " + tempLast + " 度C");
+                            tv1.setText("目前溫度值:     " + tempLast + " \u2103");  //℃ Unicode
                             tv2.setText("目前濕度值:     " + humiLast + " %RH");
                             tv3.setText("目前PM2.5濃度:  " + pm25Last + " μg/m3");
 
