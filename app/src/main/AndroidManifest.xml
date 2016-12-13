@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.user.dht11_get_v0">
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
         android:allowBackup="true"
@@ -18,7 +21,8 @@
         </activity>
         <activity android:name=".Humidity" />
         <activity android:name=".Temperature" />
-        <activity android:name=".PM25"></activity>
+        <activity android:name=".PM25" />
+        <activity android:name=".DevicesActivity"></activity>
     </application>
 
 </manifest>

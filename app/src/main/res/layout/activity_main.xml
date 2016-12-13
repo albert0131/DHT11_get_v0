@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView1"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="normal|bold"
             android:textColor="@android:color/holo_red_dark" />
 
@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView2"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textColor="@android:color/holo_green_dark"
             android:textStyle="normal|bold" />
 
@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView3"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="normal|bold"
             android:textColor="@android:color/holo_blue_dark" />
 
@@ -95,6 +95,14 @@
             android:textSize="24sp"
             android:textColor="@android:color/holo_blue_dark"
             android:onClick="clickPm25" />
+
+        <Button
+            android:text="Bluetooth CONN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button4"
+            android:textSize="24sp"
+            android:onClick="clickBT" />
 
     </LinearLayout>
 

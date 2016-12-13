@@ -180,6 +180,12 @@ public class MainActivity extends AppCompatActivity {
     }
     // -----------------------------------------------------------
 
+    // Bluetooth connection
+//    public void clickBT(View v)
+//    {
+//        Intent it = new Intent(MainActivity.this, DevicesActivity.class);
+//        startActivity(it);
+//    }
 }
 
 /*
