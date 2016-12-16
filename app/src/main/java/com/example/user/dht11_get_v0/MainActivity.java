@@ -2,6 +2,7 @@ package com.example.user.dht11_get_v0;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
@@ -58,7 +59,7 @@ class Variable {
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView tv1, tv2, tv3;
+    TextView tv1, tv2, tv3, tv4;
     private static final int msgKey1 = 111;
 
 
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         tv1 = (TextView) findViewById(R.id.textView1);      // temp
         tv2 = (TextView) findViewById(R.id.textView2);      // hum
         tv3 = (TextView) findViewById(R.id.textView3);      // pm2.5
+        tv4 = (TextView) findViewById(R.id.textView4);      // pm2.5 品質
 
         getNowData();
         new updateThread().start();
@@ -129,10 +131,38 @@ public class MainActivity extends AppCompatActivity {
                             String tempLast = objLast.getString("field1");
                             String humiLast = objLast.getString("field2");
                             String pm25Last = objLast.getString("field3");
+                            float pm25LastValue = Float.parseFloat(pm25Last);
 
                             tv1.setText("目前溫度值:     " + tempLast + " \u2103");  //℃ Unicode
                             tv2.setText("目前濕度值:     " + humiLast + " %RH");
                             tv3.setText("目前PM2.5濃度:  " + pm25Last + " μg/m3");
+
+                            // 空氣品質判斷
+                            if(0.0 <=pm25LastValue && pm25LastValue<= 15.4) {
+                                tv4.setText("目前空氣品質 : 良好");
+                                tv4.setTextColor(0xff00ff00);   //lime
+                                }
+                            else if(15.5 <=pm25LastValue && pm25LastValue<= 35.4) {
+                                tv4.setText("目前空氣品質 : 普通");
+                                tv4.setTextColor(0xffffff00);   //yellow
+                                }
+                            else if(35.5 <=pm25LastValue && pm25LastValue<= 54.4) {
+                                tv4.setText("目前空氣品質 : 對敏感族群不健康");
+                                tv4.setTextColor(0xffffa500);   //orange
+                                }
+                            else if(54.5 <=pm25LastValue && pm25LastValue<= 150.4) {
+                                tv4.setText("目前空氣品質 : 對所有族群不健康");
+                                //tv4.setTextColor(android.graphics.Color.RED);
+                                tv4.setTextColor(0xffff0000);   //red
+                                }
+                            else if(150.5 <=pm25LastValue && pm25LastValue<= 250.4) {
+                                tv4.setText("目前空氣品質 : 非常不健康");
+                                tv4.setTextColor(0xffff00ff);   //Magenta
+                                }
+                            else if(250.5 <=pm25LastValue) {
+                                tv4.setText("目前空氣品質 : 危害");
+                                tv4.setTextColor(0xffb22222);   //firebrick
+                                }
 
                         } catch (JSONException e) {
                             e.printStackTrace();

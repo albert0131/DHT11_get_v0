@@ -57,34 +57,34 @@ public class PM25 extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 
-                        String hum;
-                        float humValue;
-                        float humSum = 0;
-                        float humMax = 0;
-                        float humMin = 100;
-                        float humAvg = 0;
+                        String pm25;
+                        float pm25Value;
+                        float pm25Sum = 0;
+                        float pm25Max = 0;
+                        float pm25Min = 100;
+                        float pm25Avg = 0;
                         //int tempBuf = 0;
 
                         try {
                             for(int i=0 ; i<Variable.fieldResults ; i++) {
-                                hum = new JSONArray(new JSONObject(response).getString("feeds")).getJSONObject(i).getString("field3");
-                                humValue = Float.parseFloat(hum);
-                                humSum += humValue;
+                                pm25 = new JSONArray(new JSONObject(response).getString("feeds")).getJSONObject(i).getString("field3");
+                                pm25Value = Float.parseFloat(pm25);
+                                pm25Sum += pm25Value;
                                 //tempBuf = tempValue;
-                                if(humValue > humMax)
-                                    humMax = humValue;
-                                if(humValue < humMin)
-                                    humMin = humValue;
+                                if(pm25Value > pm25Max)
+                                    pm25Max = pm25Value;
+                                if(pm25Value < pm25Min)
+                                    pm25Min = pm25Value;
                             }
-                            humAvg = humSum/Variable.fieldResults;
+                            pm25Avg = pm25Sum/Variable.fieldResults;
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
-                        tvPm25Max.setText("最大PM2.5濃度: " + String.valueOf(humMax) + " μg/m3");
-                        tvPm25Min.setText("最小PM2.5濃度: " + String.valueOf(humMin) + " μg/m3");
-                        tvPm25Avg.setText("平均PM2.5濃度: " + String.valueOf(humAvg) + " μg/m3");
+                        tvPm25Max.setText("最大PM2.5濃度: " + String.valueOf(pm25Max) + " μg/m3");
+                        tvPm25Min.setText("最小PM2.5濃度: " + String.valueOf(pm25Min) + " μg/m3");
+                        tvPm25Avg.setText("平均PM2.5濃度: " + String.valueOf(pm25Avg) + " μg/m3");
                         // --------------------------
                     }
                 }, new Response.ErrorListener() {
