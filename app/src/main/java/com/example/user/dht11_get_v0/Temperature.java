@@ -132,11 +132,4 @@ public class Temperature extends AppCompatActivity {
     }
     // -------------------------------------------------------------------------------
 
-    //
-    public void clickBack(View v) {
-        Intent intent = new Intent();
-        intent.setClass(Temperature.this, MainActivity.class);
-        startActivity(intent);
-    }
-
 }

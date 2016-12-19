@@ -37,9 +37,6 @@
             android:text="最大濕度 : "
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/humAvg"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="10dp"
             android:id="@+id/humMax"
             android:textSize="18sp" />
 
@@ -47,9 +44,6 @@
             android:text="最小濕度 : "
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/humMax"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="14dp"
             android:id="@+id/humMin"
             android:textSize="18sp" />
 
@@ -57,9 +51,6 @@
             android:text="平均濕度 : "
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/webView2"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="14dp"
             android:id="@+id/humAvg"
             android:textSize="18sp" />
 
@@ -79,17 +70,6 @@
                 android:layout_weight="1"
                 style="@style/Widget.AppCompat.Button.Colored" />
 
-            <Button
-                android:text="返回"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/back"
-                android:textSize="18sp"
-                android:textAllCaps="false"
-                android:textStyle="normal|bold"
-                android:onClick="clickBack"
-                android:layout_weight="1"
-                style="@android:style/Widget.Button.Inset" />
         </LinearLayout>
 
     </LinearLayout>

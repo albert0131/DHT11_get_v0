@@ -102,10 +102,4 @@ public class Humidity extends AppCompatActivity {
     }
     // -------------------------------------------------------------------------------
 
-
-    public void clickBack(View v) {
-        Intent intent = new Intent();
-        intent.setClass(Humidity.this, MainActivity.class);
-        startActivity(intent);
-    }
 }

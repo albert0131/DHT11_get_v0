@@ -100,10 +100,4 @@ public class PM25 extends AppCompatActivity {
     }
     // -------------------------------------------------------------------------------
 
-
-    public void clickBack(View v) {
-        Intent intent = new Intent();
-        intent.setClass(PM25.this, MainActivity.class);
-        startActivity(intent);
-    }
 }

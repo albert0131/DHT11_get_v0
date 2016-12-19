@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -28,6 +29,9 @@ import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static android.R.attr.data;
 import static com.android.volley.toolbox.Volley.newRequestQueue;
@@ -61,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
 
     TextView tv1, tv2, tv3, tv4;
     private static final int msgKey1 = 111;
-
+    private static Boolean isExit = false;
+    private static Boolean hasTask = false;
 
 //    Button btnTem;
 //    Button btnHum;
@@ -140,28 +145,34 @@ public class MainActivity extends AppCompatActivity {
                             // ----- 空氣品質判斷 -----------------------------------
                             if(0.0 <=pm25LastValue && pm25LastValue<= 15.4) {
                                 tv4.setText("目前空氣品質 : 良好Good");
-                                tv4.setTextColor(0xff32cd32);   //limegreen
+                                tv4.setTextColor(0xff000000);   //black
+                                tv4.setBackgroundColor(0xff32cd32); //limegreen
                                 }
                             else if(15.5 <=pm25LastValue && pm25LastValue<= 35.4) {
                                 tv4.setText("目前空氣品質 : 普通Moderate");
-                                tv4.setTextColor(0xffcdcd00);   //yellow3
+                                tv4.setTextColor(0xff000000);
+                                tv4.setBackgroundColor(0xffcdcd00);   //yellow3
                                 }
                             else if(35.5 <=pm25LastValue && pm25LastValue<= 54.4) {
                                 tv4.setText("目前空氣品質 : 對敏感族群不健康!");
-                                tv4.setTextColor(0xffee9a00);   //orange2
+                                tv4.setTextColor(0xff000000);
+                                tv4.setBackgroundColor(0xffee9a00); //orange2
                                 }
                             else if(54.5 <=pm25LastValue && pm25LastValue<= 150.4) {
                                 tv4.setText("目前空氣品質 : 對所有族群不健康!!");
                                 //tv4.setTextColor(android.graphics.Color.RED);
-                                tv4.setTextColor(0xffee0000);   //red2
+                                tv4.setTextColor(0xff000000);   //
+                                tv4.setBackgroundColor(0xffee0000); //red2
                                 }
                             else if(150.5 <=pm25LastValue && pm25LastValue<= 250.4) {
                                 tv4.setText("目前空氣品質 : 非常不健康!!!");
-                                tv4.setTextColor(0xff8b008b);   //Magenta4
+                                tv4.setTextColor(0xffffffff);   //white
+                                tv4.setBackgroundColor(0xff8b008b); //Magenta4
                                 }
                             else if(250.5 <=pm25LastValue) {
                                 tv4.setText("目前空氣品質 : 危害!!!!!");
-                                tv4.setTextColor(0xff8b1a1a);   //firebrick4
+                                tv4.setTextColor(0xffffffff);   //white
+                                tv4.setBackgroundColor(0xff8b1a1a); //firebrick4
                                 }
 
                         } catch (JSONException e) {
@@ -207,6 +218,40 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setClass(MainActivity.this, PM25.class);
         startActivity(intent);
+    }
+    // -----------------------------------------------------------
+
+    // ------ 按兩下Back離開程式 -----------------------------------
+    Timer timerExit = new Timer();
+    TimerTask task = new TimerTask() {
+
+             @Override
+             public void run() {
+                     isExit = false;
+                     hasTask = true;
+                 }
+        };
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // 判斷是否按下Back
+              if (keyCode == KeyEvent.KEYCODE_BACK) {
+            // 是否要退出
+                     if(!isExit) {
+                         isExit = true; //記錄下一次要退出
+                         Toast.makeText(this, "再按一次Back退出APP"
+                         , Toast.LENGTH_SHORT).show();
+
+                         // 如果超過兩秒則恢復預設值
+                         if(!hasTask) {
+                         timerExit.schedule(task, 2000);
+                         }
+                     } else {
+                         finish(); // 離開程式
+                         System.exit(0);
+                     }
+              }
+              return false;
     }
     // -----------------------------------------------------------
 
