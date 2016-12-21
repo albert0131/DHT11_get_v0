@@ -33,6 +33,8 @@ import org.json.JSONObject;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import pl.pawelkleczkowski.customgauge.CustomGauge;
+
 import static android.R.attr.data;
 import static com.android.volley.toolbox.Volley.newRequestQueue;
 
@@ -67,7 +69,9 @@ public class MainActivity extends AppCompatActivity {
     private static final int msgKey1 = 111;
     private static Boolean isExit = false;
     private static Boolean hasTask = false;
-
+//    CustomGauge cg_temp;
+//    CustomGauge cg_humi;
+//    CustomGauge cg_pm;
 //    Button btnTem;
 //    Button btnHum;
 //    Button btnPm25;
@@ -82,6 +86,9 @@ public class MainActivity extends AppCompatActivity {
         tv2 = (TextView) findViewById(R.id.textView2);      // hum
         tv3 = (TextView) findViewById(R.id.textView3);      // pm2.5
         tv4 = (TextView) findViewById(R.id.textView4);      // pm2.5 品質
+//        cg_temp = (CustomGauge) findViewById(R.id.gauge2);
+//        cg_humi = (CustomGauge) findViewById(R.id.gauge3);
+//        cg_pm = (CustomGauge) findViewById(R.id.gauge4);
 
         getNowData();
         new updateThread().start();
@@ -141,6 +148,10 @@ public class MainActivity extends AppCompatActivity {
                             tv1.setText("目前溫度值:     " + tempLast + " \u2103");  //℃ Unicode
                             tv2.setText("目前濕度值:     " + humiLast + " %RH");
                             tv3.setText("目前PM2.5濃度:  " + pm25Last + " μg/m3");
+
+//                            float temp2 =Float.parseFloat(tempLast);
+//                            temp2=temp2*10;
+//                            cg_temp.setValue((int)temp2);
 
                             // ----- 空氣品質判斷 -----------------------------------
                             if(0.0 <=pm25LastValue && pm25LastValue<= 15.4) {

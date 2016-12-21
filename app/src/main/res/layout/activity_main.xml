@@ -82,26 +82,29 @@
             android:layout_height="wrap_content"
             android:id="@+id/buttonTem"
             android:onClick="clickTemp"
-            android:textSize="24sp"
-            android:textColor="@android:color/holo_red_dark" />
+            android:textSize="20sp"
+            android:textColor="@android:color/holo_red_dark"
+            android:layout_weight="1" />
 
         <Button
             android:text="濕度圖表資料"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/buttonHum"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textColor="@android:color/holo_green_dark"
-            android:onClick="clickHum" />
+            android:onClick="clickHum"
+            android:layout_weight="1" />
 
         <Button
             android:text="PM2.5圖表資料"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/buttonPm25"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textColor="@android:color/holo_blue_dark"
-            android:onClick="clickPm25" />
+            android:onClick="clickPm25"
+            android:layout_weight="1" />
 
     </LinearLayout>
 
